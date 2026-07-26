@@ -1,0 +1,17 @@
+#===============================================================================
+# UVM Testbench File List — Verdi
+#===============================================================================
+-f rtl.flist
++incdir+rtl
++incdir+/opt/synopsys/vcs-mx2018/O-2018.09-SP2/etc/uvm-1.2
++incdir+tb/uvm/agent
++incdir+tb/uvm/env
++incdir+tb/uvm/scoreboard
++incdir+tb/uvm/sequence
++incdir+tb/uvm/tests
++incdir+tb/uvm/interface
++incdir+tb
+tb/uvm/interface/adc_if.sv
+tb/unit/adc_analog_model.v
+tb/uvm/adc_uvm_pkg.sv
+tb/uvm/tb_top.sv

@@ -1,0 +1,98 @@
+#!/bin/bash
+# Git pre-commit hook for code quality checks
+# Supported: Verilog/SystemVerilog (project-wide via Makefile), Python, JS/TS
+#
+# Verilog lint strategy: run the project's `make lint` once across the whole
+# RTL filelist (iverilog -c <filelist>), NOT per-file. A single .v file cannot
+# elaborate on its own — `iverilog -t null -Wall <file>` on adc_top.v reports
+# "Unknown module type" for every submodule it instantiates, which are false
+# positives. `make lint` compiles the full dependency-ordered filelist so the
+# hierarchy resolves and only real lint problems surface.
+#
+# We run `make lint` only when at least one RTL/.v file is staged (cheap: the
+# whole filelist is already in the repo). TB/UVM files (.sv under tb/) are not
+# covered by `make lint` and are skipped here — they are exercised by
+# `make check` / `make test-unit` before merge, not at commit time.
+
+echo "Running pre-commit checks..."
+
+# Get staged files
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+
+if [ -z "$STAGED_FILES" ]; then
+    echo "No files staged. Skipping checks."
+    exit 0
+fi
+
+HAS_ERROR=0
+
+# --- Verilog/SystemVerilog lint (project-wide via make lint) ---
+# Trigger only when an RTL .v file is staged. TB .sv files are not linted here.
+V_RTL_FILES=$(echo "$STAGED_FILES" | grep -E '^rtl/.*\.v$' || true)
+if [ -n "$V_RTL_FILES" ]; then
+    if command -v make >/dev/null 2>&1 && [ -f Makefile ]; then
+        # Skip lint if the filelist has no real source lines yet (empty/template
+        # project state). iverilog errors "no source files" on an all-comment
+        # filelist, which is not a real problem — it just means no RTL written yet.
+        # Resolve Makefile variables: FILELIST := $(RTL_DIR)/filelist.f → rtl/filelist.f
+        RTL_DIR_VAL=$(grep -E '^RTL_DIR\s*[?:]?=' Makefile | head -1 | sed -E 's/.*[:?]?=\s*([^#]+).*/\1/' | tr -d ' ')
+        FILELIST_VAL=$(grep -E '^FILELIST\s*[?:]?=' Makefile | head -1 | sed -E 's/.*[:?]?=\s*([^#]+).*/\1/' | tr -d ' ')
+        FILELIST_VAL=$(echo "$FILELIST_VAL" | sed 's|$(RTL_DIR)|'"${RTL_DIR_VAL}"'|g')
+        [ -z "$FILELIST_VAL" ] && FILELIST_VAL=rtl/filelist.f
+        if [ -f "$FILELIST_VAL" ]; then
+            REAL_SRCS=$(grep -vE '^\s*(#|$)' "$FILELIST_VAL" | grep -vE '^\s*$')
+        else
+            REAL_SRCS=""
+        fi
+        if [ -z "$REAL_SRCS" ]; then
+            echo "  [SKIP] make lint — filelist empty (no RTL written yet)"
+        else
+            echo "Running make lint (full RTL filelist)..."
+            if make lint >/tmp/precommit_lint.log 2>&1; then
+                echo "  [PASS] make lint"
+            else
+                echo "  [FAIL] make lint — output:"
+                tail -n 30 /tmp/precommit_lint.log | sed 's/^/    /'
+                HAS_ERROR=1
+            fi
+            rm -f /tmp/precommit_lint.log
+        fi
+    else
+        echo "  NOTE: make/Makefile unavailable — skipping RTL lint"
+    fi
+fi
+
+# --- Python lint ---
+PY_FILES=$(echo "$STAGED_FILES" | grep -E '\.py$' || true)
+if [ -n "$PY_FILES" ]; then
+    if command -v ruff &> /dev/null; then
+        echo "Running ruff lint..."
+        echo "$PY_FILES" | xargs ruff check --fix 2>&1 || HAS_ERROR=1
+    elif command -v flake8 &> /dev/null; then
+        echo "Running flake8..."
+        echo "$PY_FILES" | xargs flake8 2>&1 || HAS_ERROR=1
+    fi
+fi
+
+# --- JS/TS lint ---
+JS_FILES=$(echo "$STAGED_FILES" | grep -E '\.(js|ts|jsx|tsx)$' || true)
+if [ -n "$JS_FILES" ]; then
+    if command -v eslint &> /dev/null; then
+        echo "Running eslint..."
+        echo "$JS_FILES" | xargs eslint 2>&1 || HAS_ERROR=1
+    fi
+fi
+
+if [ $HAS_ERROR -eq 1 ]; then
+    echo ""
+    echo "=========================================="
+    echo "  Checks FAILED. Please fix errors."
+    echo "=========================================="
+    exit 1
+fi
+
+echo ""
+echo "=========================================="
+echo "  All checks PASSED."
+echo "=========================================="
+exit 0

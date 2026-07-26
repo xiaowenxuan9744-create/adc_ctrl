@@ -1,0 +1,180 @@
+<mxGraphModel adaptiveColors="auto" grid="0" guides="0" tooltips="0" connect="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- Title -->
+    <mxCell id="2" value="ADC 采样时序流 — Trigger→Data 完整流水线" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontColor=#000000;fontName=Arial;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="200" y="5" width="600" height="30" as="geometry"/>
+    </mxCell>
+
+    <!-- ===== Flow Blocks (horizontal pipeline) ===== -->
+    <!-- 1. Trigger Input -->
+    <mxCell id="10" value="① 触发输入&#xa;SW_TRIG / MCTM" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="30" y="80" width="120" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- 2. SOC Generation -->
+    <mxCell id="11" value="② SOC 脉冲&#xa;adc_clkn↑ 时产生" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="190" y="80" width="120" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- 3. MUXON + ch_sel -->
+    <mxCell id="12" value="③ MUXON↑ + ch_sel&#xa;模拟采样开始" style="rounded=0;shadow=0;gradient=none;fillColor=#FFE0B2;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="350" y="80" width="120" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- 4. SPT Counter -->
+    <mxCell id="13" value="④ SPT 计数&#xa;采样时间控制" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="510" y="80" width="120" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- 5. MUXON↓ -->
+    <mxCell id="14" value="⑤ MUXON↓&#xa;SPT 完成" style="rounded=0;shadow=0;gradient=none;fillColor=#FFE0B2;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="670" y="80" width="100" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- 6. SAR Conversion -->
+    <mxCell id="15" value="⑥ SAR 转换&#xa;14-bit" style="rounded=0;shadow=0;gradient=none;fillColor=#FFE0B2;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="810" y="80" width="100" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- Row 2 -->
+    <!-- 7. EOC -->
+    <mxCell id="16" value="⑦ EOC 脉冲&#xa;adc_clkn↑ 采样" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="30" y="220" width="120" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- 8. Data Capture -->
+    <mxCell id="17" value="⑧ ADC_DATA 捕获&#xa;数据对齐" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="190" y="220" width="120" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- 9. CH_DATA Write -->
+    <mxCell id="18" value="⑨ CH_DATA 写入&#xa;VALID=1" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="350" y="220" width="120" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- 10. Interrupt / DMA -->
+    <mxCell id="19" value="⑩ 中断 / DMA&#xa;事件脉冲产生" style="rounded=0;shadow=0;gradient=none;fillColor=#FFE0E0;strokeColor=#FF0000;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="510" y="220" width="120" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- 11. Interval -->
+    <mxCell id="20" value="⑪ 通道间隔&#xa;SMPL_INTERVAL" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="670" y="220" width="120" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- 12. Next Channel -->
+    <mxCell id="21" value="⑫ 下一通道&#xa;序列指针+1" style="rounded=0;shadow=0;gradient=none;fillColor=#2A9D8F;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="830" y="220" width="100" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- ===== Row 1 Arrows ===== -->
+    <mxCell id="30" value="" style="orthogonal=1;strokeColor=#2A9D8F;strokeWidth=1;endArrow=block;arrowColor=#2A9D8F;html=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="150" y="108" as="sourcePoint"/>
+        <mxPoint x="190" y="108" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="31" value="" style="orthogonal=1;strokeColor=#2A9D8F;strokeWidth=1;endArrow=block;arrowColor=#2A9D8F;html=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="310" y="108" as="sourcePoint"/>
+        <mxPoint x="350" y="108" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="32" value="" style="orthogonal=1;strokeColor=#2A9D8F;strokeWidth=1;endArrow=block;arrowColor=#2A9D8F;html=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="470" y="108" as="sourcePoint"/>
+        <mxPoint x="510" y="108" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="33" value="" style="orthogonal=1;strokeColor=#2A9D8F;strokeWidth=1;endArrow=block;arrowColor=#2A9D8F;html=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="630" y="108" as="sourcePoint"/>
+        <mxPoint x="670" y="108" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="34" value="" style="orthogonal=1;strokeColor=#2A9D8F;strokeWidth=1;endArrow=block;arrowColor=#2A9D8F;html=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="770" y="108" as="sourcePoint"/>
+        <mxPoint x="810" y="108" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 1→2 connecting arrow -->
+    <mxCell id="35" value="SAR conversion&#xa;completes" style="orthogonal=1;strokeColor=#2A9D8F;strokeWidth=1;endArrow=block;arrowColor=#2A9D8F;html=0;fontColor=#000000;fontName=Arial;fontSize=9;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="860" y="135" as="sourcePoint"/>
+        <mxPoint x="90" y="220" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 2 Arrows -->
+    <mxCell id="36" value="" style="orthogonal=1;strokeColor=#2A9D8F;strokeWidth=1;endArrow=block;arrowColor=#2A9D8F;html=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="150" y="248" as="sourcePoint"/>
+        <mxPoint x="190" y="248" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="37" value="" style="orthogonal=1;strokeColor=#2A9D8F;strokeWidth=1;endArrow=block;arrowColor=#2A9D8F;html=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="310" y="248" as="sourcePoint"/>
+        <mxPoint x="350" y="248" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="38" value="" style="orthogonal=1;strokeColor=#2A9D8F;strokeWidth=1;endArrow=block;arrowColor=#2A9D8F;html=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="470" y="248" as="sourcePoint"/>
+        <mxPoint x="510" y="248" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="39" value="" style="orthogonal=1;strokeColor=#2A9D8F;strokeWidth=1;endArrow=block;arrowColor=#2A9D8F;html=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="630" y="248" as="sourcePoint"/>
+        <mxPoint x="670" y="248" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="40" value="" style="orthogonal=1;strokeColor=#2A9D8F;strokeWidth=1;endArrow=block;arrowColor=#2A9D8F;html=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="790" y="248" as="sourcePoint"/>
+        <mxPoint x="830" y="248" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Loop back: Next Channel → Trigger (for continuous mode) -->
+    <mxCell id="50" value="连续模式循环&#xa;!last_ch | cont_mode" style="orthogonal=1;strokeColor=#2A9D8F;strokeWidth=1;endArrow=block;arrowColor=#2A9D8F;html=0;fontColor=#000000;fontName=Arial;fontSize=9;dashed=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="880" y="220" as="sourcePoint"/>
+        <mxPoint x="90" y="135" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ===== Timing annotations ===== -->
+    <mxCell id="60" value="SPT 时间表 (adc_clk cycles):&#xa;000 → 3 | 001 → 8 | 010 → 14&#xa;011 → 29 | 100 → 42 | 101 → 56&#xa;110 → 78 | 111 → 240" style="text;html=1;strokeColor=none;fillColor=#E8E8E8;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#000000;fontName=Arial;" vertex="1" parent="1">
+      <mxGeometry x="510" y="300" width="150" height="85" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="61" value="数据对齐:&#xa;DATA_ALIGN=00 → 右对齐&#xa;DATA_ALIGN=01 → 左对齐" style="text;html=1;strokeColor=none;fillColor=#E8E8E8;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#000000;fontName=Arial;" vertex="1" parent="1">
+      <mxGeometry x="190" y="300" width="130" height="55" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="62" value="通道间隔:&#xa;SMPL_INTERVAL[3:0]&#xa;0~15 adc_clk cycles" style="text;html=1;strokeColor=none;fillColor=#E8E8E8;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#000000;fontName=Arial;" vertex="1" parent="1">
+      <mxGeometry x="675" y="300" width="120" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- Clock domain annotations -->
+    <mxCell id="70" value="adc_clkn domain" style="text;html=1;strokeColor=none;fillColor=#FFE0B2;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontColor=#000000;fontName=Arial;" vertex="1" parent="1">
+      <mxGeometry x="350" y="50" width="120" height="20" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="71" value="adc_clk domain" style="text;html=1;strokeColor=none;fillColor=#C6E2FF;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontColor=#000000;fontName=Arial;" vertex="1" parent="1">
+      <mxGeometry x="30" y="50" width="120" height="20" as="geometry"/>
+    </mxCell>
+
+    <!-- Footer note -->
+    <mxCell id="80" value="注：SOC 在 adc_clkn 上升沿产生（= adc_clk 下降沿），比在 adc_clk 域产生节省 1 周期" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#666666;fontName=Arial;" vertex="1" parent="1">
+      <mxGeometry x="200" y="370" width="600" height="20" as="geometry"/>
+    </mxCell>
+  </root>
+</mxGraphModel>

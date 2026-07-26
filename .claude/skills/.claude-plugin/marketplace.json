@@ -1,0 +1,83 @@
+{
+  "name": "project-template-skills",
+  "owner": {
+    "name": "Project Template"
+  },
+  "plugins": [
+    {
+      "name": "brainstorming",
+      "source": "./brainstorming",
+      "description": "需求探索与方案设计讨论"
+    },
+    {
+      "name": "systematic-debugging",
+      "source": "./systematic-debugging",
+      "description": "系统化调试流程"
+    },
+    {
+      "name": "writing-plans",
+      "source": "./writing-plans",
+      "description": "多步骤任务实施规划"
+    },
+    {
+      "name": "skill-creator",
+      "source": "./skill-creator",
+      "description": "创建/编辑自定义 skill"
+    },
+    {
+      "name": "test-driven-development",
+      "source": "./test-driven-development",
+      "description": "TDD 开发流程（红-绿-重构）"
+    },
+    {
+      "name": "verification-before-completion",
+      "source": "./verification-before-completion",
+      "description": "完成前强制验证"
+    },
+    {
+      "name": "subagent-driven-development",
+      "source": "./subagent-driven-development",
+      "description": "子代理驱动开发"
+    },
+    {
+      "name": "dispatching-parallel-agents",
+      "source": "./dispatching-parallel-agents",
+      "description": "并行子代理调度"
+    },
+    {
+      "name": "executing-plans",
+      "source": "./executing-plans",
+      "description": "执行实施计划"
+    },
+    {
+      "name": "using-git-worktrees",
+      "source": "./using-git-worktrees",
+      "description": "Git Worktree 使用指引"
+    },
+    {
+      "name": "using-superpowers",
+      "source": "./using-superpowers",
+      "description": "Superpowers 入口引导"
+    },
+    {
+      "name": "spec-parser",
+      "source": "./spec_parser",
+      "description": "解析设计文档（PDF/Word/Excel/Markdown/DrawIO）"
+    },
+    {
+      "name": "doc-generator",
+      "source": "./doc_generator",
+      "description": "生成设计文档（Markdown/DrawIO/Excel/Word/PDF）"
+    },
+    {
+      "name": "drawio",
+      "source": "./drawio",
+      "description": "生成 draw.io 图表"
+    },
+    {
+      "name": "humanizer-zh",
+      "source": "./humanizer-zh",
+      "description": "中文文本人性化润色"
+    }
+  ]
+}

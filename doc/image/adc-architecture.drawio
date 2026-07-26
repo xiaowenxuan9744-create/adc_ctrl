@@ -1,0 +1,205 @@
+<mxGraphModel adaptiveColors="auto" grid="0" guides="0" tooltips="0" connect="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- Title -->
+    <mxCell id="2" value="ADC Controller — 模块架构与时钟域划分" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontColor=#000000;fontName=Arial;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="250" y="10" width="500" height="35" as="geometry"/>
+    </mxCell>
+
+    <!-- PCLK Domain Box -->
+    <mxCell id="3" value="PCLK Domain (up to 200 MHz)" style="rounded=0;shadow=0;gradient=none;fillColor=none;strokeColor=#FF0000;strokeWidth=1;dashed=1;dashPattern=8 4;fontColor=#000000;fontName=Arial;fontSize=13;align=center;verticalAlign=top;html=0;whiteSpace=wrap;paddingTop=8;" vertex="1" parent="1">
+      <mxGeometry x="25" y="60" width="420" height="650" as="geometry"/>
+    </mxCell>
+
+    <!-- ADC_CLK Domain Box -->
+    <mxCell id="4" value="ADC_CLK Domain (up to 60 MHz)" style="rounded=0;shadow=0;gradient=none;fillColor=none;strokeColor=#FF0000;strokeWidth=1;dashed=1;dashPattern=8 4;fontColor=#000000;fontName=Arial;fontSize=13;align=center;verticalAlign=top;html=0;whiteSpace=wrap;paddingTop=8;" vertex="1" parent="1">
+      <mxGeometry x="545" y="60" width="430" height="650" as="geometry"/>
+    </mxCell>
+
+    <!-- ===== PCLK Domain Modules ===== -->
+    <mxCell id="10" value="adc_apb_if&#xa;APB 从接口" style="rounded=0;shadow=0;gradient=none;fillColor=#FFE0B2;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="50" y="120" width="160" height="55" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="11" value="adc_regfile (PCLK)&#xa;寄存器读路径·中断状态" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="50" y="240" width="160" height="55" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="12" value="adc_rst_sync&#xa;异步复位同步释放" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="50" y="560" width="160" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- ===== ADC_CLK Domain Modules ===== -->
+    <mxCell id="20" value="adc_seq_fsm&#xa;核心序列 FSM（9 状态）" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="570" y="120" width="180" height="55" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="21" value="adc_trig_sync&#xa;MCTM 触发同步（6 通道）" style="rounded=0;shadow=0;gradient=none;fillColor=#FFE0B2;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="570" y="220" width="180" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="22" value="adc_regfile (ADC_CLK)&#xa;CH_DATA 写路径·配置同步" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="570" y="330" width="180" height="55" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="23" value="adc_int_ctrl&#xa;中断事件汇聚与门控" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="570" y="440" width="180" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="24" value="adc_dma_req&#xa;DMA 请求生成与清除" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="570" y="540" width="180" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="25" value="adc_calib&#xa;校准控制（ST/DONE/VAL）" style="rounded=0;shadow=0;gradient=none;fillColor=#C6E2FF;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="570" y="640" width="180" height="50" as="geometry"/>
+    </mxCell>
+
+    <!-- Cross-domain module -->
+    <mxCell id="30" value="adc_sync_cell&#xa;CDC 2 级同步器" style="rounded=0;shadow=0;gradient=none;fillColor=#FFE0B2;strokeColor=#333333;strokeWidth=1;align=center;verticalAlign=middle;whiteSpace=wrap;html=0;fontColor=#000000;fontName=Arial;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="290" y="460" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <!-- ===== External Interface Labels ===== -->
+    <mxCell id="40" value="APB Slave Interface&#xa;PCLK / PRESETn&#xa;PADDR[15:0] / PWRITE / PSEL / PENABLE&#xa;PWDATA[31:0] / PRDATA[31:0]&#xa;PREADY / PSLVERR" style="text;html=1;strokeColor=none;fillColor=#E8E8E8;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#000000;fontName=Arial;" vertex="1" parent="1">
+      <mxGeometry x="25" y="300" width="135" height="95" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="41" value="Analog Interface&#xa;SOC / MUXON / CH_SEL[4:0]&#xa;EOC / ADC_DATA[13:0]" style="text;html=1;strokeColor=none;fillColor=#E8E8E8;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#000000;fontName=Arial;" vertex="1" parent="1">
+      <mxGeometry x="830" y="130" width="135" height="65" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="42" value="Ext Triggers&#xa;MCTM_TRIG[5:0]" style="text;html=1;strokeColor=none;fillColor=#E8E8E8;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#000000;fontName=Arial;" vertex="1" parent="1">
+      <mxGeometry x="830" y="230" width="135" height="40" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="43" value="Calibration&#xa;CAL_ST / CAL_DONE&#xa;CAL_VAL[5:0]" style="text;html=1;strokeColor=none;fillColor=#E8E8E8;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#000000;fontName=Arial;" vertex="1" parent="1">
+      <mxGeometry x="830" y="650" width="135" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="44" value="Interrupt &amp; DMA&#xa;ADC_INT / DMA_REQ&#xa;DMA_ACK" style="text;html=1;strokeColor=none;fillColor=#E8E8E8;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#000000;fontName=Arial;" vertex="1" parent="1">
+      <mxGeometry x="830" y="510" width="135" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- ===== Signal Connections (PCLK domain) ===== -->
+    <!-- APB bus → adc_apb_if -->
+    <mxCell id="50" value="APB bus" style="orthogonal=1;strokeColor=#F4A261;strokeWidth=1;endArrow=block;arrowColor=#F4A261;html=0;fontColor=#000000;fontName=Arial;fontSize=8;align=center;" edge="1" parent="1" source="40" target="10">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- adc_apb_if → adc_regfile(PCLK) -->
+    <mxCell id="51" value="" style="orthogonal=1;strokeColor=#E63946;strokeWidth=1;endArrow=block;arrowColor=#E63946;html=0;" edge="1" parent="1" source="10" target="11">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="130" y="175" as="sourcePoint"/>
+        <mxPoint x="130" y="240" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- adc_regfile(PCLK) → adc_rst_sync -->
+    <mxCell id="52" value="sw_rst_pulse" style="orthogonal=1;strokeColor=#E63946;strokeWidth=1;endArrow=block;arrowColor=#E63946;html=0;fontColor=#000000;fontName=Arial;fontSize=8;" edge="1" parent="1" source="11" target="12">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="130" y="295" as="sourcePoint"/>
+        <mxPoint x="130" y="560" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ===== Signal Connections (ADC_CLK domain) ===== -->
+    <!-- adc_trig_sync → adc_seq_fsm -->
+    <mxCell id="60" value="lp_trig_pulse&#xa;hp_trig_pulse" style="orthogonal=1;strokeColor=#E63946;strokeWidth=1;endArrow=block;arrowColor=#E63946;html=0;fontColor=#000000;fontName=Arial;fontSize=8;" edge="1" parent="1" source="21" target="20">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- adc_seq_fsm → adc_regfile(ADC) -->
+    <mxCell id="61" value="ch_data_wr&#xa;int_events" style="orthogonal=1;strokeColor=#2A9D8F;strokeWidth=1;endArrow=block;arrowColor=#2A9D8F;html=0;fontColor=#000000;fontName=Arial;fontSize=8;" edge="1" parent="1" source="20" target="22">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- adc_regfile(ADC) → adc_int_ctrl -->
+    <mxCell id="62" value="cfg_int_en" style="orthogonal=1;strokeColor=#E63946;strokeWidth=1;endArrow=block;arrowColor=#E63946;html=0;fontColor=#000000;fontName=Arial;fontSize=8;" edge="1" parent="1" source="22" target="23">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- adc_seq_fsm → adc_int_ctrl -->
+    <mxCell id="63" value="event pulses" style="orthogonal=1;strokeColor=#E63946;strokeWidth=1;endArrow=block;arrowColor=#E63946;html=0;fontColor=#000000;fontName=Arial;fontSize=8;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="660" y="175" as="sourcePoint"/>
+        <mxPoint x="660" y="440" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- adc_seq_fsm → adc_dma_req -->
+    <mxCell id="64" value="event pulses" style="orthogonal=1;strokeColor=#E63946;strokeWidth=1;endArrow=block;arrowColor=#E63946;html=0;fontColor=#000000;fontName=Arial;fontSize=8;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="750" y="175" as="sourcePoint"/>
+        <mxPoint x="750" y="540" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ===== Cross-domain CDC Connections ===== -->
+    <!-- PCLK→ADC_CLK: configuration sync -->
+    <mxCell id="70" value="cfg_* registers&#xa;(2-stage sync)" style="orthogonal=1;strokeColor=#6C757D;strokeWidth=1;endArrow=block;arrowColor=#6C757D;html=0;fontColor=#000000;fontName=Arial;fontSize=8;dashed=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="210" y="260" as="sourcePoint"/>
+        <mxPoint x="570" y="350" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ADC_CLK→PCLK: CH_DATA -->
+    <mxCell id="71" value="CH_DATA&#xa;STAT / CAL" style="orthogonal=1;strokeColor=#6C757D;strokeWidth=1;endArrow=block;arrowColor=#6C757D;html=0;fontColor=#000000;fontName=Arial;fontSize=8;dashed=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="570" y="360" as="sourcePoint"/>
+        <mxPoint x="210" y="270" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- int_events CDC -->
+    <mxCell id="72" value="int_events&#xa;pulse sync" style="orthogonal=1;strokeColor=#6C757D;strokeWidth=1;endArrow=block;arrowColor=#6C757D;html=0;fontColor=#000000;fontName=Arial;fontSize=8;dashed=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="570" y="460" as="sourcePoint"/>
+        <mxPoint x="210" y="310" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ===== Domain Labels (small annotation) ===== -->
+    <mxCell id="80" value="presetn&#xa;(async assert, sync deassert)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontColor=#666666;fontName=Arial;" vertex="1" parent="1">
+      <mxGeometry x="55" y="625" width="150" height="30" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="81" value="adc_clk / adc_clkn&#xa;(phase-opposite)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontColor=#666666;fontName=Arial;" vertex="1" parent="1">
+      <mxGeometry x="750" y="680" width="150" height="25" as="geometry"/>
+    </mxCell>
+
+    <!-- Analog interface edge connections -->
+    <mxCell id="85" value="analog signals" style="orthogonal=1;strokeColor=#F4A261;strokeWidth=1;endArrow=block;arrowColor=#F4A261;html=0;fontColor=#000000;fontName=Arial;fontSize=8;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="830" y="150" as="sourcePoint"/>
+        <mxPoint x="750" y="148" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Ext trigger connection -->
+    <mxCell id="86" value="" style="orthogonal=1;strokeColor=#F4A261;strokeWidth=1;endArrow=block;arrowColor=#F4A261;html=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="830" y="250" as="sourcePoint"/>
+        <mxPoint x="750" y="245" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Interrupt/DMA output -->
+    <mxCell id="87" value="" style="orthogonal=1;strokeColor=#F4A261;strokeWidth=1;endArrow=block;arrowColor=#F4A261;html=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="750" y="540" as="sourcePoint"/>
+        <mxPoint x="830" y="540" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Calibration signals -->
+    <mxCell id="88" value="" style="orthogonal=1;strokeColor=#F4A261;strokeWidth=1;endArrow=block;arrowColor=#F4A261;html=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="750" y="665" as="sourcePoint"/>
+        <mxPoint x="830" y="665" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+  </root>
+</mxGraphModel>

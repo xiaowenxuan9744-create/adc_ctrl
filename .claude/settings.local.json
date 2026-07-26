@@ -1,0 +1,90 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(python *)",
+      "Bash(python3 *)",
+      "Bash(pip install *)",
+      "Bash(pip3 install *)",
+      "Bash(npm *)",
+      "Bash(node *)",
+      "Bash(git *)",
+      "Bash(make *)",
+      "Bash(cmake *)",
+      "Bash(gcc *)",
+      "Bash(g++ *)",
+      "Bash(./scripts/*)",
+      "Bash(bash ./scripts/*)",
+      "Bash(echo *)",
+      "Bash(chmod *)",
+      "Bash(rm *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Bash(cat *)",
+      "Bash(grep *)",
+      "Bash(find *)",
+      "Bash(which *)",
+      "Bash(ls *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(sort *)",
+      "Bash(wc *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(tee *)",
+      "Bash(export *)",
+      "Bash(tclsh *)",
+      "Bash(perl *)",
+      "Bash(java *)",
+      "Bash(pdftotext *)",
+      "Bash(ln -s *)",
+      "Bash(uname *)",
+      "Bash(pwd)",
+      "Bash(mount *)",
+      "Bash(pip list *)",
+      "Bash(pip3 list *)",
+      "Bash(vcs *)",
+      "Bash(vlog *)",
+      "Bash(vsim *)",
+      "Bash(vlib *)",
+      "Bash(vmap *)",
+      "Bash(vopt *)",
+      "Bash(verdi *)",
+      "Bash(dc_shell *)",
+      "Bash(fm_shell *)",
+      "Bash(pt_shell *)",
+      "Bash(spyglass *)",
+      "Bash(sg_shell *)",
+      "Bash(icc2_shell *)",
+      "Bash(lmstat *)",
+      "Bash(lmgrd *)",
+      "Bash(iverilog *)",
+      "Bash(vvp *)",
+      "Bash(gtkwave *)",
+      "WebSearch",
+      "WebFetch",
+      "Write(tb/uvm/*)",
+      "Write(tb/uvm/**/*)",
+      "Write(spec/*.md)",
+      "Write(**)",
+      "Edit(**)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/git-checkout-warn.py\""
+          }
+        ]
+      }
+    ]
+  },
+  "additionalDirectories": [
+    ".claude/skills"
+  ]
+}

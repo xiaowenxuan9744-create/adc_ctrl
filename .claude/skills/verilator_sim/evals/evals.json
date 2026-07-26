@@ -1,0 +1,26 @@
+{
+  "skill_name": "verilator-sim",
+  "evals": [
+    {
+      "id": 1,
+      "name": "simple-counter-sim",
+      "prompt": "用 Verilator 编译并仿真一个简单的 4 位计数器模块，查看仿真波形。模块名 my_counter，包含 clk、rst_n、count 输出。",
+      "expected_output": "成功编译 Verilog 代码，生成可执行文件，运行仿真并打开 GTKWave 查看波形",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "check-installation",
+      "prompt": "检查我的系统是否已安装 Verilator 和 GTKWave，如果没有则帮我安装",
+      "expected_output": "检查 MSYS2 环境和 Verilator 安装状态，必要时执行安装步骤",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "compile-existing-design",
+      "prompt": "帮我用 Verilator 编译 d:/tmp/fisheye-correct 中的 Verilog 文件并运行仿真",
+      "expected_output": "识别项目中的 Verilog 文件，创建 testbench，编译并运行仿真",
+      "files": []
+    }
+  ]
+}

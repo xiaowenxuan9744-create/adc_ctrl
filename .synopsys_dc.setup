@@ -1,0 +1,31 @@
+#==============================================================================
+# .synopsys_dc.setup — ADC 控制器 Design Compiler 综合环境
+# 工艺：TSMC 28HPC+  (tcbn28hpcplusbwp12t40p140)
+# 库  ：NLDM，预编译 .db（96 角），典型角 tt 0.9V 25°C
+#==============================================================================
+# 库路径用环境变量占位，clone 后按本机实际路径设：
+#   export ADC_PDK=/path/to/pdk          # PDK 解压根
+#   export ADC_PROJ=/path/to/adc_new    # 本项目根
+# 库子目录固定为 $ADC_PDK/TSMCHOME/digital/Front_End/timing_power_noise/
+#   NLDM/tcbn28hpcplusbwp12t40p140_180a（含 96 个 .db/.lib）
+#==============================================================================
+
+# --- search_path：库目录 + RTL 源目录（\`include "adc_params.vh" 解析用）---
+# ADC_PDK / ADC_PROJ 未设时给默认值（本机路径），便于本机直接跑
+if {[info exists env(ADC_PDK)] == 0}  { set env(ADC_PDK)  "/path/to/pdk" }
+if {[info exists env(ADC_PROJ)] == 0} { set env(ADC_PROJ) "/path/to/adc_new" }
+
+set search_path [concat . $search_path \
+    $env(ADC_PDK)/TSMCHOME/digital/Front_End/timing_power_noise/NLDM/tcbn28hpcplusbwp12t40p140_180a \
+    $env(ADC_PROJ)/rtl \
+]
+
+# --- 库设置（target/link 仅给 .db 文件名，由 search_path 解析）---
+# 典型角：TT process, 0.9V, 25°C（TSMC28HPC+ 标称典型角）
+set target_library  "tcbn28hpcplusbwp12t40p140tt0p9v25c.db"
+set link_library    "* tcbn28hpcplusbwp12t40p140tt0p9v25c.db"
+set symbol_library  ""     ;# 该 PDK 未含 .sdb → schematic 不可用，不阻塞综合
+
+# --- 综合 HDL 解析选项 ---
+set hdlin_auto_save_templates true
+set hdlin_check_no_hdl_warnings false
